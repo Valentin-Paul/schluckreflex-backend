@@ -27,16 +27,16 @@ module.exports = (app) => {
     app.use(
       cors({
         credentials: true,
-        origin: process.env.ORIGIN || "http://localhost:3001",
+        origin: process.env.ORIGIN || "http://localhost:8000",
       })
     );
   
     // In development environment the app logs
-    app.use(logger("dev"));
+    // app.use(logger("dev"));
     // To have access to `body` property in the request
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
-    app.use(cookieParser());
+    // app.use(cookieParser());
   
     // ℹ️ Middleware that adds a "req.session" information and later to check that you are who you say you are 😅
     app.use(
@@ -47,11 +47,11 @@ module.exports = (app) => {
         store: MongoStore.create({
           mongoUrl: MONGO_URI,
         }),
-        cookie: {
-          maxAge: 1000 * 60 * 60 * 24 * 365,
-          sameSite: "none",
-          secure: process.env.NODE_ENV === "production",
-        },
+        // cookie: {
+        //   maxAge: 1000 * 60 * 60 * 24 * 365,
+        //   sameSite: "none",
+        //   secure: process.env.NODE_ENV === "production",
+        // },
       })
     );
   
